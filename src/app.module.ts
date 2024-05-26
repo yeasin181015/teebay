@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
 import { join } from 'path';
 import { AppResolver } from './app.resolver';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AppResolver } from './app.resolver';
       autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
       definitions: { path: join(process.cwd(), 'src/graphql.ts') },
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
