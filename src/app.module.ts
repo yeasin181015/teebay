@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver } from '@nestjs/apollo';
 import { join } from 'path';
+import { Module } from '@nestjs/common';
 import { AppResolver } from './app.resolver';
+import { ApolloDriver } from '@nestjs/apollo';
+import { GraphQLModule } from '@nestjs/graphql';
 import { UserModule } from './user/user.module';
+import { UserResolver } from './user/user.resolver';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -16,8 +16,9 @@ import { UserModule } from './user/user.module';
       definitions: { path: join(process.cwd(), 'src/graphql.ts') },
     }),
     UserModule,
+    ProductModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, AppResolver],
+  controllers: [],
+  providers: [UserResolver],
 })
 export class AppModule {}

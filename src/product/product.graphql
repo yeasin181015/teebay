@@ -1,0 +1,17 @@
+type Product {
+  id: Int!
+  email: String!
+  password: String!
+}
+
+input CreateProductInput {
+  description: String!
+}
+
+type Query {
+  login(email: String!, password: String!): User
+}
+
+type Mutation {
+  createUser(data: CreateUserInput): User
+}

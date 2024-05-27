@@ -8,8 +8,23 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export interface CreateUserInput {
+    email: string;
+    password: string;
+}
+
+export interface User {
+    id: number;
+    email: string;
+    password: string;
+}
+
 export interface IQuery {
-    index(): string | Promise<string>;
+    login(email: string, password: string): User | Promise<User>;
+}
+
+export interface IMutation {
+    create(createUserData: CreateUserInput): User | Promise<User>;
 }
 
 type Nullable<T> = T | null;
