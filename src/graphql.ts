@@ -20,6 +20,13 @@ export interface CreateProductInput {
     categories: string[];
 }
 
+export interface UpdateProductInput {
+    id: number;
+    description: string;
+    name: string;
+    categories: string[];
+}
+
 export interface User {
     id: number;
     email: string;
@@ -41,6 +48,8 @@ export interface IQuery {
 export interface IMutation {
     createUser(createUserData: CreateUserInput): User | Promise<User>;
     createProduct(createProductData: CreateProductInput): Product | Promise<Product>;
+    editProduct(updateProductData: UpdateProductInput): Product | Promise<Product>;
+    deleteProduct(): string | Promise<string>;
 }
 
 type Nullable<T> = T | null;

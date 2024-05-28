@@ -23,6 +23,8 @@ type Query {
 type Mutation {
   createUser(createUserData: CreateUserInput!): User!
   createProduct(createProductData: CreateProductInput!): Product!
+  editProduct(updateProductData: UpdateProductInput!): Product!
+  deleteProduct: String!
 }
 
 input CreateUserInput {
@@ -34,5 +36,12 @@ input CreateProductInput {
   description: String!
   name: String!
   userId: Int!
+  categories: [String!]!
+}
+
+input UpdateProductInput {
+  id: Int!
+  description: String!
+  name: String!
   categories: [String!]!
 }

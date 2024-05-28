@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Prisma, Product } from '@prisma/client';
 import { CreateProductInput } from './dto/createProductInput';
+import { UpdateProductInput } from './dto/updateProductInput';
 
 @Injectable()
 export class ProductService {
@@ -10,20 +10,12 @@ export class ProductService {
   async create(data: CreateProductInput) {
     const { categories, userId, name, description } = data;
 
-    const categoryIds = await this.prisma.category.findMany({
-      where: {
-        name: {
-          in: categories,
-        },
-      },
-      select: {
-        id: true,
-      },
+    const categoryList = categories.map((cat) => {
+      const item = {
+        name: cat,
+      };
+      return item;
     });
-
-    const categoryProductConnections = categoryIds.map((item) => ({
-      category: { connect: { id: item.id } },
-    }));
 
     const product = await this.prisma.product.create({
       data: {
@@ -33,15 +25,11 @@ export class ProductService {
           connect: { id: userId },
         },
         categories: {
-          create: categoryProductConnections,
+          create: categoryList,
         },
       },
       include: {
-        categories: {
-          include: {
-            category: true,
-          },
-        },
+        categories: true,
       },
     });
 
@@ -50,7 +38,22 @@ export class ProductService {
       name: product.name,
       description: product.description,
       userId: product.userId,
-      categories: product.categories.map((cat) => cat.category.name),
+      categories: product.categories.map((cat) => cat.name),
     };
   }
+
+  async edit(productId: number, data: UpdateProductInput) {
+    // const product = await this.prisma.product.update({
+    //   where: {
+    //     id: productId,
+    //   },
+    //   data: {
+    //     name: data.name,
+    //     description: data.description,
+    //     categories: data.categories,
+    //   },
+    // });
+  }
+
+  delete() {}
 }
