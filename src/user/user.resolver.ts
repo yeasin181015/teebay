@@ -9,7 +9,6 @@ export class UserResolver {
 
   @Mutation(() => User)
   createUser(@Args('createUserData') createUserData: CreateUserInput) {
-    console.log('ssss');
     return this.userService.create(createUserData);
   }
 

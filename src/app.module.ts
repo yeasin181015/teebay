@@ -20,6 +20,6 @@ import { ProductResolver } from './product/product.resolver';
     ProductModule,
   ],
   controllers: [],
-  providers: [UserResolver, ProductResolver],
+  providers: [],
 })
 export class AppModule {}

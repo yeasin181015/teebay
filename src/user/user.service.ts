@@ -10,13 +10,17 @@ export class UsersService {
     return this.prisma.user.create({ data });
   }
 
-  async login(data: Prisma.UserCreateInput): Promise<User> {
+  async login(data: Prisma.UserCreateInput): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
       where: {
         email: data.email,
       },
     });
 
-    return user;
+    if (user.password === data.password) {
+      return user;
+    }
+
+    return null;
   }
 }
