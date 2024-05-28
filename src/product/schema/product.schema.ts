@@ -6,11 +6,14 @@ export class Product {
   id: number;
 
   @Field((type) => String)
+  name: string;
+
+  @Field((type) => String)
   description: string;
 
   @Field((type) => Int)
   userId: number;
 
-  @Field()
+  @Field(() => [String], { nullable: false })
   categories: [string];
 }

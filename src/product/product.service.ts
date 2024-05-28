@@ -21,9 +21,8 @@ export class ProductService {
       },
     });
 
-    // const categoryIdList = categoryIds.map((category) => category.id);
-    const categoryProductConnections = categoryIds.map((category) => ({
-      category: { connect: { id: category.id } },
+    const categoryProductConnections = categoryIds.map((item) => ({
+      category: { connect: { id: item.id } },
     }));
 
     const product = await this.prisma.product.create({
@@ -37,7 +36,21 @@ export class ProductService {
           create: categoryProductConnections,
         },
       },
+      include: {
+        categories: {
+          include: {
+            category: true,
+          },
+        },
+      },
     });
-    console.log(product);
+
+    return {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      userId: product.userId,
+      categories: product.categories.map((cat) => cat.category.name),
+    };
   }
 }

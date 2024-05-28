@@ -8,15 +8,31 @@ type User {
   password: String!
 }
 
+type Product {
+  id: Int!
+  name: String!
+  description: String!
+  userId: Int!
+  categories: [String!]!
+}
+
 type Query {
   login(email: String!, password: String!): User!
 }
 
 type Mutation {
-  create(createUserData: CreateUserInput!): User!
+  createUser(createUserData: CreateUserInput!): User!
+  createProduct(createProductData: CreateProductInput!): Product!
 }
 
 input CreateUserInput {
   email: String!
   password: String!
+}
+
+input CreateProductInput {
+  description: String!
+  name: String!
+  userId: Int!
+  categories: [String!]!
 }

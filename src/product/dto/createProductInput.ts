@@ -11,6 +11,6 @@ export class CreateProductInput {
   @Field(() => Int)
   userId: number;
 
-  @Field()
+  @Field(() => [String])
   categories: [string];
 }
