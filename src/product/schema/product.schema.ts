@@ -1,4 +1,14 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { CategoryInputFields } from '../dto/createProductInput';
+
+@ObjectType()
+class Category {
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => String)
+  name: string;
+}
 
 @ObjectType()
 export class Product {
@@ -14,6 +24,6 @@ export class Product {
   @Field((type) => Int)
   userId: number;
 
-  @Field(() => [String], { nullable: false })
-  categories: [string];
+  @Field(() => [Category])
+  categories: Category[];
 }

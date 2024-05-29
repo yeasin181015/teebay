@@ -17,14 +17,19 @@ export interface CreateProductInput {
     description: string;
     name: string;
     userId: number;
-    categories: string[];
+    categories: CategoryInputFields[];
+}
+
+export interface CategoryInputFields {
+    id: number;
+    name: string;
 }
 
 export interface UpdateProductInput {
     id: number;
     description: string;
     name: string;
-    categories: string[];
+    categories: CategoryInputFields[];
 }
 
 export interface User {
@@ -33,12 +38,17 @@ export interface User {
     password: string;
 }
 
+export interface Category {
+    id: number;
+    name: string;
+}
+
 export interface Product {
     id: number;
     name: string;
     description: string;
     userId: number;
-    categories: string[];
+    categories: Category[];
 }
 
 export interface IQuery {
@@ -49,7 +59,8 @@ export interface IMutation {
     createUser(createUserData: CreateUserInput): User | Promise<User>;
     createProduct(createProductData: CreateProductInput): Product | Promise<Product>;
     editProduct(updateProductData: UpdateProductInput): Product | Promise<Product>;
-    deleteProduct(): string | Promise<string>;
+    deleteProduct(deleteId: number): string | Promise<string>;
+    buyProduct(productId: number, userId: number, type: string): string | Promise<string>;
 }
 
 type Nullable<T> = T | null;

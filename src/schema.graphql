@@ -8,12 +8,17 @@ type User {
   password: String!
 }
 
+type Category {
+  id: Int!
+  name: String!
+}
+
 type Product {
   id: Int!
   name: String!
   description: String!
   userId: Int!
-  categories: [String!]!
+  categories: [Category!]!
 }
 
 type Query {
@@ -24,7 +29,8 @@ type Mutation {
   createUser(createUserData: CreateUserInput!): User!
   createProduct(createProductData: CreateProductInput!): Product!
   editProduct(updateProductData: UpdateProductInput!): Product!
-  deleteProduct: String!
+  deleteProduct(deleteId: Int!): String!
+  buyProduct(productId: Int!, userId: Int!, type: String!): String!
 }
 
 input CreateUserInput {
@@ -36,12 +42,17 @@ input CreateProductInput {
   description: String!
   name: String!
   userId: Int!
-  categories: [String!]!
+  categories: [CategoryInputFields!]!
+}
+
+input CategoryInputFields {
+  id: Int!
+  name: String!
 }
 
 input UpdateProductInput {
   id: Int!
   description: String!
   name: String!
-  categories: [String!]!
+  categories: [CategoryInputFields!]!
 }
