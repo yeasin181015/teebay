@@ -9,6 +9,10 @@
 /* eslint-disable */
 
 export interface CreateUserInput {
+    firstName?: Nullable<string>;
+    lastName?: Nullable<string>;
+    address?: Nullable<string>;
+    phoneNumber?: Nullable<string>;
     email: string;
     password: string;
 }
@@ -35,7 +39,11 @@ export interface UpdateProductInput {
 export interface User {
     id: number;
     email: string;
-    password: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    phoneNumber: string;
+    access_token?: Nullable<string>;
 }
 
 export interface Category {
@@ -53,6 +61,7 @@ export interface Product {
 
 export interface IQuery {
     login(email: string, password: string): User | Promise<User>;
+    getAllUsers(): User[] | Promise<User[]>;
 }
 
 export interface IMutation {

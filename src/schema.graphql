@@ -5,7 +5,11 @@
 type User {
   id: Int!
   email: String!
-  password: String!
+  firstName: String!
+  lastName: String!
+  address: String!
+  phoneNumber: String!
+  access_token: String
 }
 
 type Category {
@@ -23,6 +27,7 @@ type Product {
 
 type Query {
   login(email: String!, password: String!): User!
+  getAllUsers: [User!]!
 }
 
 type Mutation {
@@ -34,6 +39,10 @@ type Mutation {
 }
 
 input CreateUserInput {
+  firstName: String = ""
+  lastName: String = ""
+  address: String = ""
+  phoneNumber: String = ""
   email: String!
   password: String!
 }

@@ -15,6 +15,10 @@ datasource db {
 
 model User {
   id Int @default(autoincrement()) @id
+  firstName String?
+  lastName String?
+  address String?
+  phoneNumber String?
   email String @unique
   password String
   products Product[]
@@ -22,7 +26,7 @@ model User {
 }
 model Category {
   id Int @default(autoincrement()) @id
-  name String
+  name String @unique()
   products CategoryProducts[] 
 }
 model Product {

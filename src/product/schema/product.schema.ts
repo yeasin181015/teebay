@@ -1,5 +1,4 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { CategoryInputFields } from '../dto/createProductInput';
 
 @ObjectType()
 class Category {

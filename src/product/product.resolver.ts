@@ -3,7 +3,6 @@ import { ProductService } from './product.service';
 import { Args, Int, Mutation, Resolver } from '@nestjs/graphql';
 import { CreateProductInput } from './dto/createProductInput';
 import { UpdateProductInput } from './dto/updateProductInput';
-import { DeleteProductInput } from './dto/deleteProductInput';
 
 @Resolver(() => Product)
 export class ProductResolver {
@@ -36,9 +35,4 @@ export class ProductResolver {
   ) {
     return this.productService.buy(productId, userId, type);
   }
-
-  // @Mutation(() => String)
-  // deleteProduct(@Args({ name: 'deleteId', type: () => Int }) id: number) {
-  //   return this.productService.delete(id);
-  // }
 }

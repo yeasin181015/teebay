@@ -11,10 +11,6 @@ export class ProductService {
   async create(data: CreateProductInput) {
     const { categories, userId, name, description } = data;
 
-    const categoryConnections = categories.map((cat) => ({
-      categoryId: cat.id,
-    }));
-
     const product = await this.prisma.product.create({
       data: {
         name,

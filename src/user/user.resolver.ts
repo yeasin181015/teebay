@@ -7,16 +7,21 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 export class UserResolver {
   constructor(private readonly userService: UsersService) {}
 
-  @Mutation(() => User)
+  @Mutation((returns) => User)
   createUser(@Args('createUserData') createUserData: CreateUserInput) {
     return this.userService.create(createUserData);
   }
 
-  @Query(() => User)
+  @Query((returns) => User)
   login(
     @Args({ name: 'email', type: () => String }) email: string,
     @Args({ name: 'password', type: () => String }) password: string,
   ) {
     return this.userService.login({ email, password });
+  }
+
+  @Query((returns) => [User])
+  getAllUsers() {
+    return this.userService.getUsers();
   }
 }
